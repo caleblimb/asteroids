@@ -2,7 +2,7 @@
 A simple clone of asteroids with a scrolling level and infinite levels.
 
 This is based on a school project, but the scope has been vastly increased from the project requirements.
-The original disign was the basic design for asteroids.
+The original design was the basic design for asteroids.
 # Additional Features
 ###  Scrolling Background
 * The ship is in the center always and the background moves instead
