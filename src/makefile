@@ -1,15 +1,31 @@
 ###############################################################
 # Program:
-#     Milestone 10, Asteroids
-#     Brother {Burton, Falin, Ercanbrack, Comeau}, CS165
+#     Project 13, Asteroids, Asteroids
+#     Brother Clements, CS165
 # Author:
-#     your name here
+#     Caleb Limb
 # Summary:
-#     Put your summary code here... 
+#     A simple Asteroinds game in which the user controls a
+#          ship in order to shoot asteroids. The program draws
+#          basic polygons using opengl and handles velocities
+#          to move them. Collisions are handled for objects
+#          and various forms of feedback are displayed on 
+#          screen.
 # Above and Beyond
-#     When you submit your final project (not for milestones),
-#     list anything here that you did to go above and beyond
-#     the base requirements for your project.
+#     Scrolling Background
+#          The ship is in the center always and the background
+#          moves instead
+#     Life System
+#          Whenever hit, the ship respawns unilt all lives are
+#          lost
+#     Comets
+#          A faster small ateroid for extra challenge
+#     Level System
+#          After all asteroids are destroyed, a new wave spawns
+#     Screen Shake
+#          Screen shakes on certain collisions
+#     Space Background
+#          Draws stars and Earth
 ###############################################################
 
 
@@ -18,8 +34,8 @@ LFLAGS = -lglut -lGLU -lGL
 ###############################################################
 # Build the main game
 ###############################################################
-a.out: driver.o game.o uiInteract.o uiDraw.o point.o velocity.o flyingObject.o ship.o bullet.o rocks.o
-	g++ driver.o game.o uiInteract.o uiDraw.o point.o velocity.o flyingObject.o ship.o bullet.o rocks.o $(LFLAGS)
+asteroids.out: driver.o game.o uiInteract.o uiDraw.o point.o velocity.o flyingObject.o ship.o bullet.o rocks.o sky.o particleEmmiter.o
+	g++ driver.o game.o uiInteract.o uiDraw.o point.o velocity.o flyingObject.o ship.o bullet.o rocks.o sky.o particleEmmiter.o $(LFLAGS)
 
 ###############################################################
 # Individual files
@@ -51,21 +67,26 @@ game.o: game.cpp game.h uiDraw.h uiInteract.h point.h velocity.h flyingObject.h 
 velocity.o: velocity.cpp velocity.h point.h
 	g++ -c velocity.cpp
 
-flyingObject.o: flyingObject.cpp flyingObject.h point.h velocity.h uiDraw.h
+flyingObject.o: flyingObject.cpp flyingObject.h point.h velocity.h uiDraw.h game.h
 	g++ -c flyingObject.cpp
 
-ship.o: ship.cpp ship.h flyingObject.h point.h velocity.h uiDraw.h
+ship.o: ship.cpp ship.h flyingObject.h point.h velocity.h uiDraw.h game.h
 	g++ -c ship.cpp
 
-bullet.o: bullet.cpp bullet.h flyingObject.h point.h velocity.h uiDraw.h
+bullet.o: bullet.cpp bullet.h flyingObject.h point.h velocity.h uiDraw.h game.h
 	g++ -c bullet.cpp
 
-rocks.o: rocks.cpp rocks.h flyingObject.h point.h velocity.h uiDraw.h
+rocks.o: rocks.cpp rocks.h flyingObject.h point.h velocity.h uiDraw.h game.h
 	g++ -c rocks.cpp
 
+particleEmmiter.o: particleEmmiter.cpp particleEmmiter.h flyingObject.h point.h velocity.h uiDraw.h game.h
+	g++ -c particleEmmiter.cpp
+
+sky.o: sky.cpp sky.h flyingObject.h point.h velocity.h uiDraw.h game.h
+	g++ -c sky.cpp
 
 ###############################################################
 # General rules
 ###############################################################
 clean:
-	rm a.out *.o
+	rm asteroids.out *.o
